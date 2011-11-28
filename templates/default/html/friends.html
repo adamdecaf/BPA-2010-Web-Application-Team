@@ -1,0 +1,40 @@
+
+<div id="content">
+	<h2><?php echo USER_FRIENDS_TITLE; ?></h2>
+
+	<?php
+	
+		// Get the friends
+		$friends = get_friends(get_user_id());
+		
+		echo '<ul id="friends">';
+		
+		// Check to see if ther are any friends.
+		if (empty($friends[0])) {
+		
+			echo '<li>' . PROFILE_NO_FRIENDS . '</li>';
+		
+		} else {
+		
+			// Print out each friend in a box.
+			// Remember, we only have the username and id.
+			foreach ($friends as $friend) {
+				
+				// Get the latest update from the user.
+				$update = get_latest_update($friend['id']);
+				
+				// Print out the user.
+					echo '<li>';
+						echo '<a href="?profile=' . $friend['id'] . '">' . $friend['username'] . '</a> | ';
+						echo '<a href="' . $update['location'] . '">' . $update['title'] . '</a> ';
+						echo '(' . $update['timestamp'] . ')';
+					echo '</li>';
+			}
+			
+		}
+		
+		echo '</ul>';
+		
+	?>
+	
+</div>

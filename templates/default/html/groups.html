@@ -1,0 +1,57 @@
+
+<div id="content">
+	<h2>
+		<?php 
+			echo USER_GROUPS_TITLE; 
+			echo ' -- <a href="javascript:(function () { show_elm(\'group-new\',\'block\'); })();">' . GROUP_NEW_GROUP . '</a>';
+		?>
+	</h2>
+	
+	<div id="group-new">
+		<h3 class="group-header "><?php echo GROUP_NEW_GROUP; ?></h3>
+		
+		<form action="?" method="POST">
+			<label for="title"><?php echo GROUP_NEW_TITLE; ?></label>
+				<input type="text" id="title" name="title" /><br />
+				
+			<label for="public"><?php echo GROUP_NEW_PUBLIC; ?></label>
+				<input type="checkbox" name="public[]" id="public" value="yes" />
+				
+				<input type="hidden" name="type" value="new-group" />
+				<input type="submit" value="<?php echo FORM_SUBMIT; ?>" /><br />
+				
+			<textarea name="desc" id="group-new-desc"></textarea>
+			
+		</form>
+	</div>
+
+	<?php
+	
+		// Get the groups
+		$groups = get_groups(get_user_id());
+		
+		echo '<ul id="groups">';
+		
+		// Check for the existence of groups.
+		if (empty($groups[0])) {
+		
+			echo '<li>' . PROFILE_NO_GROUPS . '</li>';
+		
+		} else {
+		
+			// Print out each group in a list.
+			foreach ($groups as $group) {
+				
+				// Print out the group.
+					echo '<li>';
+						echo '<a href="?group=' . $group['group_id'] . '">' . $group['title'] . '</a> | ' . $group['desc'];
+					echo '</li>';
+			}
+			
+		}
+		
+		echo '</ul>';
+		
+	?>
+	
+</div>

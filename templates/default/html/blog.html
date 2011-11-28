@@ -1,0 +1,21 @@
+
+<div id="content">
+	<h3><?php echo META_BLOG_TITLE; ?></h3>
+	
+	<div id="admin_blog_posts">
+		<?php
+			// Grab the results
+			$results = MySQL::search(Data::get('sql'));
+		
+			// Show each result
+			foreach ($results as $result) {
+				echo '<span class="admin_blog_post">';
+					echo '<span class="admin_blog_date">' . $result['timestamp'] . '</span>';
+					echo '<span class="admin_blog_title">' . $result['title'] . '</span><br />';
+					echo '<span class="admin_blog_author">By: ' . $result['author'] . '</span><br />';
+					echo '<p class="admin_blog_content">' . $result['text'] . '</p>';
+				echo '</span><br />';
+			}
+		?>
+	</div>
+</div>

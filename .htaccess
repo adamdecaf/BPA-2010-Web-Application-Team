@@ -1,0 +1,8 @@
+# Set the default index
+DirectoryIndex index.php
+
+# Setup the rules for the sitemap and robots.txt
+RewriteEngine on
+RewriteBase /
+RewriteRule robots.txt application\/meta\/robots\.txt
+RewriteRule sitemap.txt application\/meta\/sitemap\.txt

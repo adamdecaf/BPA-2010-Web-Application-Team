@@ -1,0 +1,76 @@
+
+<div id="content">
+	<h3><?php echo META_ROADMAP_TITLE; ?></h3>
+	
+	<!-- 
+		We're working on a way to easilly translate this for users. 
+		The idea is to have a drop down menu which will change the text 
+		(via an XHR) when it's changed.
+		
+		E.g.
+		<select name="lang" onchange="$('#roadmap-paragraph').innerTEXT = $.xhr.get('langchange.php?lang='+this.selectedIndex.value);">
+			<option value="jp">Japanese</option>
+			<option value="cn">Chinese</option>
+		</select>
+		
+		However, for now an English only version will suffice.
+	-->	
+	<p id="roadmap-paragraph">
+		This is our roadmap, our plan for the future development.<br /><br />
+		
+		<ul id="roadmap">
+			<li>Milestone #1</li>
+				
+				<ul class="milestone">
+					<li class="completed">Finish "Static" Pages (About, Contact, Privacy, Roadmap)</li>
+					<li class="completed">Only show public (admin) blog posts</li>
+					<li class="completed">User Registration</li>
+					<li class="completed">Friends (List, Add, Delete)</li>
+					<li>Groups (List, Add, Delete)</li>
+					<li>IE CSS Support</li>
+					<li>Home Page Updates (For friends, groups, walls)</li>
+					<li class="completed">Profiles</li>
+					<li>Walls</li>
+					<li>Private Messages</li>
+				</ul>
+				
+			<li>Milestone #2</li>
+			
+				<ul class="milestone">
+					<li>Logout Feature</li>
+					<li>Email User upon registration</li>
+					<li>Better validation on all user input</li>
+					<li>Search for other people</li>
+					<li>Privacy Controls</li>
+					<li>Sharing Links</li>
+					<li>Picture Uploading</li>
+					<li>Voting on Links</li>
+					<li>Slideshows</li>
+					<li>Shortcuts</li>
+					<li>Group newsletters</li>
+					<li>More Profile Information Fields</li>
+					<li>Link to other accounts on profile page</li>
+				</ul>
+			
+			<li>Milestone #3</li>
+			
+				<ul class="milestone">
+					<li>User Blogs</li>
+					<li>User Forums</li>
+					<li>API</li>
+					<li>XML/RSS/JSON Feeds</li>
+					<li>Events (Create, RSVP, Share)</li>
+					<li>Calendar (Day, Week, Month)</li>
+					<li>Update "Static" Pages (About, Contact, Privacy, Roadmap)</li>
+				</ul>
+				
+			<li>Milestone #4</li>
+			
+				<ul class="milestone">
+					<li>User Themes</li>
+					<li>Developer Sandbox</li>
+				</ul>
+			
+		</ul>
+	</p>
+</div>

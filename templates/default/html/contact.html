@@ -1,0 +1,27 @@
+
+<div id="content">
+	<h3><?php echo META_CONTACT_TITLE; ?></h3>
+	
+	<!-- Show the form to contact us with. -->
+	<!-- 
+		We will include a captcha here, to prevent false form submission.  
+		Alongside there will be back-end validation of the submission time,
+		a hidden field, and uri checks.
+	-->
+	<form action="?" method="POST">
+	
+		<?php echo CONTACT_FORM_TITLE . '<br />'; ?>
+		
+		<label for="contact_name"><?php echo CONTACT_FORM_NAME; ?></label>
+			<input type="text" name="name" id="contact_name" /><br />
+			
+		<label for="contact_email"><?php echo CONTACT_FORM_EMAIL; ?></label>
+			<input type="text" name="email" id="contact_email" /><br />
+			
+		<label for="contact_message"><?php echo CONTACT_FORM_MESSAGE; ?></label><br />
+			<textarea name="message" id="contact_message"></textarea><br />
+			
+		<input type="hidden" name="type" value="contact" />
+		<input type="submit" value="<?php echo FORM_SUBMIT;?>" />
+	</form>
+</div>

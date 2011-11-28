@@ -1,0 +1,24 @@
+
+<div id="content">
+	<h3><?php echo META_ABOUT_TITLE; ?></h3>
+	
+	<!-- 
+		We're working on a way to easilly translate this for users. 
+		The idea is to have a drop down menu which will change the text 
+		(via an XHR) when it's changed.
+		
+		E.g.
+		<select name="lang" onchange="$('#about-paragraph').innerTEXT = $.xhr.get('langchange.php?lang='+this.selectedIndex.value);">
+			<option value="jp">Japanese</option>
+			<option value="cn">Chinese</option>
+		</select>
+		
+		However, for now an English only version will suffice.
+	-->
+	<p id="about-paragraph">
+		This site is designed for the <a href="http://bpa.org" title="Business Professionals of America.">BPA</a> 
+		Web Application Team competition.  The site was designed by Adam Shannon and Josh Hetrick, each member was 
+		able to bring unique abilities and ideas to the project.  Josh and Adam have known each other for several 
+		years and were able to communicate, design and develop the site in a quick and secure manor.
+	</p>
+</div>

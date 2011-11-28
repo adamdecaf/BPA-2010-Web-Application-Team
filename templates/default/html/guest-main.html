@@ -1,0 +1,56 @@
+
+<div id="content">
+	
+	<div class="right">
+		<!-- Show the login form. -->
+		<form action="?" method="POST" id="submit_form">
+			<label for="username"><?php echo GUEST_MAIN_FORM_USERNAME; ?></label>
+				<input type="text" name="username" id="username" /><br />
+				
+			<label for="password"><?php echo GUEST_MAIN_FORM_PASSWORD; ?></label>
+				<input type="password" name="password" id="password" /><br />
+				
+			<input type="hidden" name="type" value="login" />
+				
+			<input type="button" onclick="$('#submit_form').submit();" value="<?php echo FORM_SUBMIT; ?>" /> 
+		</form>
+		
+		<br />
+		
+		<!-- Show the signup form, but only on click. -->
+		<div>
+		
+			<!-- The form used to register with. -->
+			<div id="register_form">
+				<form action="?" method="POST" id="form_register">
+					<label for="username"><?php echo GUEST_MAIN_FORM_USERNAME; ?></label>
+						<input type="text" name="username" id="username" /><br />
+						
+					<label for="password"><?php echo GUEST_MAIN_FORM_PASSWORD; ?></label>
+						<input type="password" name="password" id="password" /><br />
+						
+					<label for="email"><?php echo GUEST_MAIN_FORM_EMAIL; ?></label>
+						<input type="text" name="email" id="email" /><br />
+						
+					<input type="hidden" name="type" value="register" />
+						
+					<input type="button" onclick="$('#form_register').submit();" value="<?php echo FORM_REGISTER; ?>" /> 
+				</form>
+			</div>
+		
+			<!-- The button to change the form. -->
+			<span class="button" onclick="$('#submit_form').style.display = 'none'; $('#register_form').style.display = 'block'; this.style.display = 'none';" />
+				<?php echo FORM_REGISTER; ?>
+			</span>
+			
+		</div>
+	</div>
+	
+	<!-- Now start with the rest of the page. -->
+	<h2><?php echo GUEST_MAIN_TITLE; ?></h2>
+	
+	<p>
+		<?php echo GUEST_MAIN_TEXT; ?>
+	</p>
+	
+</div>

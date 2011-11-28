@@ -1,0 +1,23 @@
+
+<div id="content">
+	<h3><?php echo META_PRIVACY_TITLE; ?></h3>
+	
+	<!-- 
+		We're working on a way to easilly translate this for users. 
+		The idea is to have a drop down menu which will change the text 
+		(via an XHR) when it's changed.
+		
+		E.g.
+		<select name="lang" onchange="$('#privacy-paragraph').innerTEXT = $.xhr.get('langchange.php?lang='+this.selectedIndex.value);">
+			<option value="jp">Japanese</option>
+			<option value="cn">Chinese</option>
+		</select>
+		
+		However, for now an English only version will suffice.
+	-->	
+	<p id="privacy-paragraph">
+		Your privacy is safe, we create a <a href="http://en.wikipedia.org/wiki/sha1">Sha1</a> 
+		<a href="http://en.wikipedia.org/wiki/Hash_function">hash</a> from your password, and we only
+		store one cookie with a unique string in it.
+	</p>
+</div>

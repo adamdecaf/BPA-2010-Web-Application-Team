@@ -1,0 +1,115 @@
+
+<div id="content">
+	
+	<?php
+		// Get some basic data about the group.
+		$group_id = (int) $_GET['group'];
+		
+		// Now grab the group info, members, and conversations
+		$data = get_group(get_user_id(), $group_id);
+		
+	?>
+	
+		<span class="right">
+			<?php echo GROUP_CREATED . $data['base']['timestamp']; ?>
+				<br />
+			<?php echo GROUP_CONVERSATIONS . $data['base']['conversations']; ?>
+		</span>
+	
+		<h2 id="group-header" onclick="window.location.reload();"><?php echo $data['base']['title']; ?></h2>
+		
+			<span id="group-desc">
+				<?php echo $data['base']['desc']; ?>
+			</span>
+			
+		<hr />
+		
+		<!-- Remember to hide this in CSS and show in JS. -->
+		<div id="group-conversation">
+			
+		</div>
+		
+		<div id="group-new-conversation">
+			<form action="?" method="POST">
+				<!-- Show a link to close this form. -->
+				<a class="right" href="javascript:(function () { $('#group-conversation').style.display = 'none'; })();"><?php echo GROUP_CONVO_CLOSE; ?></a>
+				
+				<h3 class="group-header align-left"><?php echo GROUP_NEW_CONVO_DESC; ?></h3><br />
+				
+				<label for="group-new-convo-title"><?php echo GROUP_NEW_CONVO_TITLE; ?></label>
+					<input type="text" id="group-new-convo-title" name="title" />
+					
+					<input type="submit" value="<?php echo FORM_SUBMIT; ?>" /><br />
+					
+				<textarea id="group-new-convo-message" name="message"></textarea>
+				
+				<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+				<input type="hidden" name="type" value="group-new-convo" />
+			</form>
+		</div>
+		
+		<div id="group-new-reply">
+			<!-- Show a link to close this form. -->
+			<a class="right" href="javascript:(function () { $('#group-conversation').style.display = 'none'; })();"><?php echo GROUP_CONVO_CLOSE; ?></a>
+			
+			<form action="?" method="POST">
+				<h3>
+					<?php echo GROUP_NEW_REPLY_DESC; ?>
+					<input type="submit" value="<?php echo FORM_SUBMIT; ?>" />
+				</h3>
+			
+				<textarea id="group-new-convo-message" name="message"></textarea>
+				<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+				<input type="hidden" name="group_conversation_id" id="convo_id" />
+				<input type="hidden" name="type" value="group-new-reply" />
+			</form>
+		</div>
+		
+		<br />
+		
+		<!-- The rest of the page. -->
+		<div id="group-members">
+			<?php
+				// Show the members
+				echo '<h3 class="group-header">' . GROUP_MEMBERS . '</h3>';
+				
+				// Print each member
+				echo '<ul id="group-members">';
+				
+				foreach ($data['members'] as $member) {
+					echo '<li><a href="?profile=' . $member['user_id'] . '">' . get_username($member['user_id']) . '</a></li>';
+				}
+				
+				echo '</ul>';
+			?>
+		</div>
+		
+		<div id="group-conversations">
+			<?php
+				// Show the conversations
+				echo '<h3 class="group-header">' . GROUP_TOPICS;
+					echo ' -- <a href="javascript:show_thread_form();">' . GROUP_NEW_CONVO . '</a>';
+				echo '</h3>';
+				
+				echo '<ul id="group-conversations">';
+				
+				// Echo each conversation
+				foreach ($data['conversations'] as $topic) {
+				
+					// Show each topic and have it setup to show the posts in a higher level box.
+					echo '<li class="group-conversation" onclick="show_conversation(' . $group_id . ',' . $topic['group_conversation_id'] . ');">';
+					
+						// Show the main details from the OP.
+						echo '<span class="right">' . $topic['timestamp'] . '</span>';
+						echo '<strong>' . $topic['title'] . '</strong> -- ' . GROUP_CONVO_AUTHOR . get_username($topic['author']) . '<br />';
+						echo '<span>' . $topic['message'] . '</span>';
+						
+					echo '</li>';
+				}
+				
+				echo '</ul>';
+				
+			?>
+		</div>
+	
+</div>

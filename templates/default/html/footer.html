@@ -1,0 +1,11 @@
+
+<script type="text/javascript" src="<?php echo TEMPLATE_JS . 'frameworks/dom.js'; ?>"></script>
+<?php
+	if (array_key_exists('group', $_GET)) {
+		echo '<script type="text/javascript" src="' . TEMPLATE_JS . "xhr.js\"></script>\n";
+		echo '<script type="text/javascript" src="' . TEMPLATE_JS . 'show_conversations.js"></script>';
+	}
+?>
+
+</body>
+</html>

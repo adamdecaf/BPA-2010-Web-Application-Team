@@ -1,0 +1,32 @@
+
+<div id="content">
+	<h2><?php echo USER_UPDATE_TITLE; ?></h2>
+	<?php
+		// Grab the results
+		$results = MySQL::search(Data::get('sql'));
+		$ids = array();
+		
+		foreach ($results as $result) {
+			// Grab the if from each and get the user name for it.
+			if (empty($ids[$result['from']])) {
+				Data::set('sql', 'SELECT `username` FROM `' . Data::get('db') . '`.`users` WHERE `user_id` = "' . MySQL::clean($result['from']) . '"', true);
+					$tmp = MySQL::search(Data::get('sql'));
+				
+				$ids[$result['from']] = $tmp[0]['username'];
+			}
+			
+			echo '<span class="update">';
+				echo '<span class="from">' . USER_UPDATE_FROM . '<a href="?profile=' . $result['from'] . '">' . $ids[$result['from']] . '</a></span> | ';
+				echo '<span class="link"><a href="' . $result['location'] . '">' . $result['title'] . '</a></span>';
+				echo '<span class="desc">' . $result['desc'] . '</span>';
+			echo '</span><br />';
+		}
+		
+		// Check to see if there are no results.
+		if (empty($results)) {
+			echo NEW_USER_MAIN_PAGE;
+		}
+		
+	?>
+	
+</div>

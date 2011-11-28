@@ -1,0 +1,55 @@
+
+<?php
+	// Get the basic info.
+	$thread = get_group_comments((int) $_GET['group_id'], (int) $_GET['convo_id']);
+	
+	// Remember,
+	// $thread['op'] -> Original Post
+	// $thread['messages'] -> Array of messages
+?>
+
+	<div id="group-convo-op">
+		<a class="right" href="javascript:(function () { $('#group-conversation').style.display = 'none'; })();"><?php echo GROUP_CONVO_CLOSE; ?></a>
+		<h3 class="group-header">
+			<?php
+				// Print out the title and a link to reply.
+				echo $thread['op']['title'];
+				echo ' -- <a href="javascript:(function () {show_comment_form(' . $thread['op']['group_conversation_id'] . ');})();">' . FORM_REPLY . '</a>';
+			?>
+		</h3>
+			
+		<span class="right">
+			<?php echo GROUP_CONVO_AUTHOR . get_username($thread['op']['author']) . '<br />'; ?>
+			<?php echo $thread['op']['timestamp']; ?>
+		</span>
+			
+		<div id="group_convo_main_message">
+			<?php echo $thread['op']['message']; ?>
+		</div>
+	</div>
+	
+	<br />
+	<hr />
+	<br />
+	
+	<div id="group-convo-messages">
+		
+		<?php
+			// Show each message.
+			foreach ($thread['messages'] as $message) {
+				
+				// Print each message in its own block.
+				echo '<div><span class="right">';
+					echo GROUP_CONVO_AUTHOR . get_username($message['author']) . '<br />';
+					echo $thread['op']['timestamp'];
+				echo '</span>';
+				
+				// Show the actual message.
+				echo '<div>' . $message['message'] . '</div></div><br /><br />';
+				
+			}
+			
+		?>
+	<br />
+	</div>
+	

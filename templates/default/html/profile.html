@@ -1,0 +1,95 @@
+
+<?php
+	// Get what you need.
+	// $friends: (['id'], ['username'])
+	// 		$update = get_latest_update($friend['id']);
+	// $update: (['location'], ['title'], ['timestamp'])
+	// $groups: (['group_id'], ['title'], ['desc'])
+	$user_id = (int) $_GET['profile'];
+	$username = get_username($user_id);
+	$friends = get_friends($user_id);
+	$groups = get_groups($user_id);
+	
+	// Check to see if the user is a friend of the profile.
+	$is_friend = is_friend(get_user_id(), $user_id);
+		
+?>
+
+<div id="content">
+	<h2>
+		<?php 
+			// Print out the title
+			echo $username . PROFILE_TITLE; 
+			
+			// Don't show a link to add yourself.
+			if ($user_id != get_user_id()) {
+			
+			// If the user is a friend show a link to add, and
+			// if not then show a link to add them.
+			
+			echo ' -- <span id="change_friend">';
+			
+				if ($is_friend) {
+				
+					echo '<a href="?change_friend=' . $user_id . '">' . PROFILE_REMOVE_FRIEND . '</a>';
+					
+				} else {
+					
+					echo '<a href="?change_friend=' . $user_id . '">' . PROFILE_ADD_FRIEND . '</a>';
+					
+				}
+				
+				echo PROFILE_CHANGE_FRIEND . '</span>';
+				
+			}
+			
+		?>
+	</h2>
+	<?php
+		
+		// Print out the details of the user.
+		
+		// Show the user's groups.
+		echo '<div id="groups">';
+			echo '<strong>' . $username . PROFILE_GROUPS . ':</strong><ul id="groups">';
+			
+			// Check to see if this user has any friends.
+			if (empty($groups[0])) {
+			
+				echo '<li>' . PROFILE_NO_GROUPS . '</li>';
+			
+			} else {
+			
+				foreach ($groups as $group) {
+					echo '<li><a href="?group=' . $group['group_id'] . '">' . $group['title'] . '</a> | ' . $group['desc'] . '</li>';
+				}
+			}
+			
+		echo '</ul></div>';
+		
+		// Show the user's friends.
+		echo '<div id="friends">';
+			echo '<strong>' . $username . PROFILE_FRIENDS . ':</strong><ul id="friends">';
+		
+			// Check to see if we have any groups for this user.
+			if (empty($friends[0])) {
+			
+				echo '<li>' . PROFILE_NO_FRIENDS . '</li>';
+				
+			} else {
+		
+				foreach ($friends as $friend) {
+					$update = get_latest_update($friend['id']);
+				
+					echo '<li>';
+						echo '<a href="?profile=' . $friend['id'] . '">' . $friend['username'] . '</a> | ';
+						echo '<a href="' . $update['location'] . '">' . $update['title'] . '</a>';
+					echo '</li>';
+				}
+			}
+		
+		echo '</div>';
+		
+	?>
+	
+</div>
